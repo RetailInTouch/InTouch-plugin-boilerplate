@@ -1,5 +1,5 @@
 {
-  "name": "[Plugin name]",
+  "name": "plugin-name",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -12,6 +12,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "intouch-plugin-bridge": "git+https://github.com/RetailInTouch/InTouch-plugin-bridge.git#0.0.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.0",
@@ -19,8 +20,7 @@
     "react-scripts": "3.4.1",
     "redux": "^4.0.5",
     "redux-persist": "^6.0.0",
-    "reselect": "^4.0.0",
-    "intouch-plugin-bridge": "git+https://github.com/RetailInTouch/InTouch-plugin-bridge.git#0.0.1"
+    "reselect": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

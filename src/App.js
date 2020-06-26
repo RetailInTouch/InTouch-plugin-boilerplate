@@ -19,6 +19,7 @@ import {
 import configureStore       from './redux/store';
 
 import Demo                 from './modules/demo/Demo';
+import Demo2                from './modules/demo/Demo2';
 
 const { store, persistor } = configureStore();
 
@@ -49,6 +50,7 @@ class App extends Component {
 
                             <Switch>
                                 <Route path="/" exact component={Demo} />
+                                <Route path="/demo2" exact component={Demo2} />
                                 <Route path="*">
                                     <div>Not found!</div>
                                 </Route>
