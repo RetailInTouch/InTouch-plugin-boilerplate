@@ -1,56 +1,39 @@
-import React, { Component } from 'react';
+import React, { useEffect, useRef } from 'react';
 
-import { IntouchContext }   from 'intouch-plugin-bridge';
+import { useKeephub } from 'keephub-plugin-bridge';
 
-class Page extends Component {
+const Page = ({ children, style, ...rest_props }) => {
+    const  { bridge } = useKeephub();
+    const container = useRef(null);
+    const height = useRef(0);
 
-    constructor(props) {
-        super(props);
-        this.height = 0;
-    }
-
-    componentDidMount() {
-        this.updateHeight();
-        window.addEventListener('resize', this.updateHeight);
-
-    }
-
-    componentDidUpdate() {
-        this.updateHeight();
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.updateHeight);
-    }
-
-    updateHeight = () => {
-        const intouch = this.context;
-
-        if (this.container.offsetHeight !== this.height) {
-            this.height = this.container.offsetHeight;
-           
-            intouch.bridge.setIframeHeight(this.height);
-        }
-      
-    }
-
-    render() {
-        const { children, style, ...rest_props } = this.props;
+    useEffect(() => {
         
-        let page_style = {
-            paddingTop: 20,
-            ...style
+        const updateHeight = () => {
+            if (container.current.offsetHeight !== height.current) {
+                height.current = container.current.offsetHeight;
+                bridge.setIframeHeight(height.current);
+            }
         }
 
-        return (
-            <div ref={(container) => {this.container = container}} style={page_style} {...rest_props}>
-                {children}
-            </div>
-        );
+        window.addEventListener('resize', updateHeight);
+
+        return () => {
+            window.removeEventListener('resize', updateHeight);
+        }
+
+    }, []);
+
+    const page_style = {
+        paddingTop: 20,
+        ...style
     }
 
+    return (
+        <div ref={container} style={page_style} {...rest_props}>
+            { children }
+        </div>
+    );
 }
-
-Page.contextType = IntouchContext;
 
 export default Page;

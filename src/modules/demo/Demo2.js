@@ -1,47 +1,42 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-import { withRouter }       from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
-import Container            from '@material-ui/core/Container';
-import Card                 from '@material-ui/core/Card';
-import CardHeader           from '@material-ui/core/CardHeader';
-import CardContent          from '@material-ui/core/CardContent';
-import Button               from '@material-ui/core/Button';
+import Container from '@material-ui/core/Container';
+import Card from '@material-ui/core/Card';
+import CardHeader from '@material-ui/core/CardHeader';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
 
-import Page                 from '../../components/page/Page';
+import Page from '../../components/page/Page';
 
-class Demo2 extends Component {
+const Demo2 = () => {
+    const history = useHistory();
 
-    navigateBack = () => {
-        const { history } = this.props;
-
+    const navigateBack = () => {
         history.push('/');
     }
  
-    render() {
+    return (
+        <Page>
 
-        return (
-            <Page>
+            <Container maxWidth="sm">
 
-                <Container maxWidth="sm">
+                <Card style={{marginBottom: 10}}>
+                    <CardHeader title="Demo plugin" style={{height: '40px' }} />
+                    <CardContent>
 
-                    <Card style={{marginBottom: 10}}>
-                        <CardHeader title="Demo plugin" style={{height: '40px' }} />
-                        <CardContent>
+                        <Button variant="contained" color="primary" onClick={ navigateBack }>
+                            Terug
+                        </Button> 
+                    </CardContent>
+                </Card>
 
-                            <Button variant="contained" color="primary" onClick={ this.navigateBack }>
-                                Terug
-                            </Button> 
-                        </CardContent>
-                    </Card>
-
-                </Container>
-                
-            </Page> 
-        );
-
-    }
-
+            </Container>
+            
+        </Page> 
+    );
+    
 }
 
-export default withRouter(Demo2);
+export default Demo2;
